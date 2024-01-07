@@ -1,19 +1,33 @@
 /**
  *
- * bable 은 자바스크립트 컴파일러
- * 바벨은 우리가 작성한 최신 JS로 컴파일해준다
- * => nodeJS가 JS를 문제없이 이해하도록 변환해줌
  *
  *
+ * 바벨을 require하지않고
+ * package.json에 babel로 컴파일하는 scripts를
+ * 만들예정
+ * => npm install @babel/node 설치
  *
- * dependencies는 프로젝트를 실행하기 위한걸 말하고,
- * devDependencies은 개발자(사람)에게 필요한걸 나타낸다
- * --save--dev 로 설치하면 package.json의 devDependencies에 표시된다
+ *  "scripts": {
+ *  "dev": "babel-node index.js" }로 수정
+ *
+ * 위와같이 변경하면 babel도 같이 적용되서 실행된다
+ *
+ * babel을 설치했기때문에  2번뿐만 아니라 1번처럼 사용가능
  *
  *
- * https://babeljs.io/docs/ 참고(사용하는 종류에 따라 설치하는 종류는 달라짐)
- * npm install --save-dev @babel/core 설치
- * 바벨을 설치하고 babel.config.json파일을 만든뒤 바벨 공홈에 있는 내용을 복붙해준다
- * npm install @babel/preset-env --save-dev 설치해준다
+ */
+
+import express from "express"; //1
+//const express = require("express"); //2
+
+console.log("good");
+
+/**
+ * nodemon 은 파일이 수정되는걸 감시해주는 패키지
+ * npm i nodemon --save-dev 설치
  *
+ * package.json에서 script를 아래와 같이 수정해준다
+ * "dev": "nodemon --exec babel-node index.js"
+ *
+ * 그러면 파일 수정할때마다 nodemon이 알아서 재시작 된다
  */
