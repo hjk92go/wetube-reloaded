@@ -4,18 +4,15 @@ const PORT = 4000;
 const app = express();
 
 /**
- * 3.5 Middlewares(part_1)
- * middleware는 중간에 있는 sw  => middleware은 req와 res사이에 있다(브라우저가 req한다음 내가 응답하기전에 미들웨어가잇음)
- * 모든 middleware은 handler이고, 모든 handler는 middleware이다.
+ * 3.6 Middlewares(part_2)
+ * app.get() 말고 => app.use() 에 대해서
  *
- * 앞으로 handler => controller라는 말을 쓸 예정
- * 원래 controller에는 두개의 argument말고도 하나가 더 있다 => next
- * next argument는 다음 함수를 호출해준다.
+ * app.use()는 global middleware를 만들수 있게 해준다
  *
  */
 
-const gossipMiddleware = (req, res, next) => {
-  console.log(`SOMEONE IS GOING TO : ${req.url}`);
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.url}`); //어떤 method가 어느 url로 향하는지 알수있게됨
   next();
 };
 
@@ -23,30 +20,35 @@ const handleHome = (req, res) => {
   return res.send("i love middleware");
 };
 
+const privateMiddleware = (req, res, next) => {
+  const url = req.url;
+  if (url === "/protected") {
+    res.send("<h1>NOT ALLOWED</h1>");
+  }
+  console.log("Allowed, you may continue.");
+  next();
+};
+
+//finalware라서 next필요없음
+const handleProtected = (req, res) => {
+  return res.send("WELECOME TO THE PRIVATE LOUNGE.");
+};
+
 /**
- * 아래의 함수(app.get("/", gossipMiddleware, handleHome); 실행되는 순서
- * 브라우저는 홈페이지를 get하려 할 거고,
- * express가 gossipMiddleware를 호출, gossipMiddleware은 콘솔을 실행하고나서 next함수를 호출할것
- * express next()를 보고, 다음 함수인 handleHome을 호출한다.
+ * app.use() 작성시 순서가 중요함
+ * app.use하는게 먼저오고, 그다음에 url의 get이 와야한다.
  *
- * 무엇이든 middleware가 될수있다.
- * 하지만, handleHome은 middleware가 아니라 finalware
- * 따라서 handleHome함수에는 next함수가 필요없음 브라우저에 res를 줘서 종료시키기 떄문
+ * 모든 route에서 app.use함수를 사용한다.
+ * app.get을 먼저쓰고 use를 쓰면 logger 작동X
  *
- * 만약에 아래와 같이 gossipMiddleware함수를 가정 한다면 next()는 호출되지 않는다 => 그러면 next()를 호출하지 않았기때문에
- * handleHome함수도 실행되지 않는다.
- * const gossipMiddleware = (req, res, next) => {
- * console.log("I'm in the middleware");
- * return res.send("lalall")
- * next();
- * };
- *
- * 정리하자면, 어떤 함수든 middleware가 될수 있고
- * 어떤함수든 next()함수를 호출한다면 이 함수는 middleware라는걸 의미한다
+ * middleware위에다가 두면, 모든 route에 적용이 된다.
  *
  */
 
-app.get("/", gossipMiddleware, handleHome);
+app.use(logger);
+app.use(privateMiddleware);
+app.get("/", handleHome);
+//app.get("/protected", handleProtected); //privateMiddleware함수로 차단당해서 실행X(next함수로 전달해주지 않았기때문)
 
 const handleLogin = (req, res) => {
   return res.send({ message: "Login Here👍" });
