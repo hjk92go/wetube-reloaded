@@ -5,20 +5,24 @@ const app = express();
 
 /**
  *
- * 3.8 Servers Recap
+ * 3.9 Controllers Recap
+ * 모든 controller에는 req,res가 있다
+ * req,res는 express에서 제공
  *
- * 서버란?
- *  - 항상 켜져있고 인터넷에 연결 돼 있으면서 req를 listening 하고 있는 컴퓨터
- *  - req는 우리가 서버에게 요청하는 것들
+ * express api 보면 많은 method가 존재
  *
- * 컴퓨터에는 많은 포트들이 있고 서버는 전부 listening 할수는 없다
- * 포트는 창문을 여는거라고 생각할 것 / PORT = 4000는 백엔드의 관습
+ * but 지금은 send와 end에 집중
  *
- * 브라우저는 서버에게 페이지를 request( 요청)하고 서버는 그에 대해 response(응답)한다.
- * 만약 브라우저의 요청에 대해 서버가 return을 통해 응답하지 않으면 무한 로딩상태가 됨
+ *  end는 연결을 종료시킨다(아무응답안하고) res.end() 주면 끝
+ * (return res.end()와 같음)
  *
- * 브라우저는 서버에게 페이지를 request하는것
- * 서버가 이 request를 받아들이고, 브라우저에게 response를 준다
+ * send는(응답하고 종료시킴)
+ *
+ * 서버는 request 를 받으면 반드시 response 를 해주어야 한다.
+ * 브라우저 무한 로딩 되기 때문이다.
+ *
+ * controller자리에는 반드시 함수가 들어가야한다
+ * 화살표 함수는 리턴값을 포함시킴
  *
  */
 
