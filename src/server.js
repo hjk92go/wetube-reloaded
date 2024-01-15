@@ -5,33 +5,20 @@ const app = express();
 
 /**
  *
- * 3.7 Setup Recap
+ * 3.8 Servers Recap
  *
- * 1. package.json: node.js 관련 정보를 담는 방법으로 단순한 텍스트 형식.
- * - 해당 파일에 스크립트를 넣으면 npm이 어떤 행동을 할 수 있게 만들어줌.
- * Ex) Scripts를 생성하고 그 안에 입력하면 터미널에 스크립트_이름을 사용할 수 있음.
+ * 서버란?
+ *  - 항상 켜져있고 인터넷에 연결 돼 있으면서 req를 listening 하고 있는 컴퓨터
+ *  - req는 우리가 서버에게 요청하는 것들
  *
- * 2. npm i
- * - npm이 버전 정보를 확인해서 정보 추가.
- * - 다운된 express는 node_module로 자동 폴더 생성.
- *   해당 폴더는 공유 작업시 git에 공유할 필요가 없음. 공유 작업자는 package.json만 전달 받고,
- *   "npm i" 하면 자동으로 node_module가 설치 되기 때문.)
+ * 컴퓨터에는 많은 포트들이 있고 서버는 전부 listening 할수는 없다
+ * 포트는 창문을 여는거라고 생각할 것 / PORT = 4000는 백엔드의 관습
  *
- * "dependencies"
- * 프로젝트가 작동하기 위해 필요한 것들
+ * 브라우저는 서버에게 페이지를 request( 요청)하고 서버는 그에 대해 response(응답)한다.
+ * 만약 브라우저의 요청에 대해 서버가 return을 통해 응답하지 않으면 무한 로딩상태가 됨
  *
- * "devDependencies"
- * 개발자가 개발할 때 필요한 것들(사람에게)
- * --save--dev 로 설치하면 package.json의 devDependencies에 표시된다
- *
- * babel: 최신 코드를 지원하지 않을 때 변환시키기 위해서 사용. (사용하기 위해선 babel.config.json 파일이 필요함. 해당 파일에 원하는 바벨 플러그인을 추가.)
- * 최신 자바스크립트를 사용하게 해주는 플러그인.
- *
- * "nodemon"
- * 파일을 지켜보다 변화가 생기면 재시작 해줌. (꼭 필요한 것은 아니지만, 개발할 때 편리하게 만들어줌.)
- *
- * 3. node_modules는 용량이 크기 때문에 git에 올리지 않음.
- * ".gitignore" 파일을 생성해서 안에 /node_modules 를 추가하여 업로드 제외 시킴.
+ * 브라우저는 서버에게 페이지를 request하는것
+ * 서버가 이 request를 받아들이고, 브라우저에게 response를 준다
  *
  */
 
