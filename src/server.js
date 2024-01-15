@@ -5,24 +5,29 @@ const app = express();
 
 /**
  *
- * 3.9 Controllers Recap
- * 모든 controller에는 req,res가 있다
- * req,res는 express에서 제공
+ * 3.10 Middleware Recap
  *
- * express api 보면 많은 method가 존재
+ * # Middleware
+ *  - 중간에 있는 sw
+ * 미들웨어는 컨트롤러가 request 처리 작업을 완료하고 response 를 전달하기 전에
+ * request 처리를 도와주는 콜백함수이다. req와 res사이에 존재함
  *
- * but 지금은 send와 end에 집중
+ * 미들웨어는 request 오브젝트와, response 오브젝트 말고도 next 파라미터를 갖는다.
+ * next 파라미터는 다음으로 request 를 처리할 콜백함수를 담고있다.
  *
- *  end는 연결을 종료시킨다(아무응답안하고) res.end() 주면 끝
- * (return res.end()와 같음)
+ * 관습적으로 마지막 controller에는 next를 안써준다(쓸필요가 없기 때문)
  *
- * send는(응답하고 종료시킴)
+ * 미들웨어 전체적으로 다 사용하기 위해 => app.use를 사용해주면 미들웨어 전체에 적용된다
+ * 그대신 순서가 중요 순서는 미들웨어전에 써줘야함
  *
- * 서버는 request 를 받으면 반드시 response 를 해주어야 한다.
- * 브라우저 무한 로딩 되기 때문이다.
  *
- * controller자리에는 반드시 함수가 들어가야한다
- * 화살표 함수는 리턴값을 포함시킴
+ * <비유_식당>
+ * request: 입장
+ * middleware: 몇분이세요?
+ * request: 아 일행 먼저 왔어요!
+ * middleware: 저쪽 테이블 맞으세요? next();
+ * home: 오 왔어?
+ *
  *
  */
 
