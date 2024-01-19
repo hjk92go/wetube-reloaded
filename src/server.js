@@ -8,16 +8,35 @@ const app = express();
 const logger = morgan("dev");
 
 /**
+ * 4.0 What are Routers?
+ * 라우터는 컨트롤러와 URL관리를 쉽게해줌 -> mini application이라고 생각하면 편함
  *
- * 3.11 External Middlewares
- * morgan은 node.js용 request logger middleware이다
- * npm i morgan 설치
+ * - 프로젝트에 있어서 가장 먼저 생각해야 하는것
+ * 1. 데이터 -> 어떤 종류의 데이터를 이용할 것인가
+ *  => wetube에서는 크게 2가지의 데이터가 있음 1) 비디오 2) 유저
+ *  이것들은 프로젝트의 도메인임 이것들을 URL차원에서 생각하면
+ *  URL을 디자인해야한다
  *
- * morgan이랑 직접만든 미들웨어의 차이점?
- * morgan이 좀더 정교(GET, state code, 응답시간 제공.. => 옵션에 따라 제공되는 정보가 다름)
- * morgan도 next함수 존재함
  *
- * https://www.npmjs.com/package/morgan 확인가능
+ * / -> home
+ * /join -> Join
+ * /login -> Login
+ * /search -> Search
+ *
+ *
+ * /users/edit -  -> Edit user
+ * /users/delete - user -> Delete user
+ *
+ *
+ * /videos/watch  -> Watch Video
+ * /videos/edit  -> Edit Video
+ * /videos/delete -> Delete Video
+ * /videos/comments -> Comment on a video
+ * /videos/comments/delete -> Delete A Comment of a Video
+ *
+ * 라우터는 우리가 작업중인 주제를 기반으로 URL을 그룹화 해줌
+ *
+ *
  *
  *
  */
