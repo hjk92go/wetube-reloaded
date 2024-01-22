@@ -20,3 +20,9 @@ const handleListening = () => {
 };
 
 app.listen(PORT, handleListening);
+
+/**
+ * 4.3 Exports
+ * 라우터(함수를 사용하는)와 컨트롤러(함수)를 함께 쓰지 않는것이 좋다
+ * 데이터(함수)가 길어 질수 있으니 구분해서 써주는게 좋음 => controller 폴더를 따로 만들어 준다.
+ */
