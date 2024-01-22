@@ -20,13 +20,3 @@ const handleListening = () => {
 };
 
 app.listen(PORT, handleListening);
-
-/**
- * 4.6 Planning Routes
- *
- *
- *
- *
- *
- *
- */
