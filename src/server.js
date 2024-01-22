@@ -22,7 +22,9 @@ const handleListening = () => {
 app.listen(PORT, handleListening);
 
 /**
- * 4.3 Exports
- * 라우터(함수를 사용하는)와 컨트롤러(함수)를 함께 쓰지 않는것이 좋다
- * 데이터(함수)가 길어 질수 있으니 구분해서 써주는게 좋음 => controller 폴더를 따로 만들어 준다.
- */
+ * 4.4 Router Recap
+ *
+ * Router은 URL이 어떻게 시작하는지에 따라 나누는 방법이다
+ * URL을 더 낫고 독립적인 방법으로 관리하기 위해 사용
+ *
+ *  */
