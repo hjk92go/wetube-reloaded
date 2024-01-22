@@ -6,52 +6,40 @@ import morgan from "morgan";
 const PORT = 4000;
 const app = express();
 const logger = morgan("dev");
+app.use(logger); //app.use(morgan("dev"))라고 사용해도 같음
 
 /**
- * 4.0 What are Routers?
- * 라우터는 컨트롤러와 URL관리를 쉽게해줌 -> mini application이라고 생각하면 편함
+ * 4.1 Making Our Routers
  *
- * - 프로젝트에 있어서 가장 먼저 생각해야 하는것
- * 1. 데이터 -> 어떤 종류의 데이터를 이용할 것인가
- *  => wetube에서는 크게 2가지의 데이터가 있음 1) 비디오 2) 유저
- *  이것들은 프로젝트의 도메인임 이것들을 URL차원에서 생각하면
- *  URL을 디자인해야한다
- *
- *
+ * ----- global router(홈에서 바로 갈 수 있는 페이지들) -----
  * / -> home
  * /join -> Join
  * /login -> Login
  * /search -> Search
  *
- *
- * /users/edit -  -> Edit user
- * /users/delete - user -> Delete user
- *
- *
- * /videos/watch  -> Watch Video
- * /videos/edit  -> Edit Video
- * /videos/delete -> Delete Video
- * /videos/comments -> Comment on a video
- * /videos/comments/delete -> Delete A Comment of a Video
- *
- * 라우터는 우리가 작업중인 주제를 기반으로 URL을 그룹화 해줌
- *
- *
- *
- *
+ *  라우터를 쓰는법
+ * 1. 루트url을 먼저 가져온다(비디오 라우터의 루트url은 /videos)
+ * 2. app.use("/videos", videoRouter); app.use써준다.
+ * 3. 라우터들에 함수를 넣어주기 위해 함수작성
+ * 4. router.get을 사용한다
  */
 
-const handleHome = (req, res) => {
-  return res.send("i love middleware");
-};
+//라우터
+const globalRouter = express.Router();
+const handleHome = (req, res) => res.send("Home");
+globalRouter.get("/", handleHome);
 
-const handleLogin = (req, res) => {
-  return res.send({ message: "Login Here👍" });
-};
+const userRouter = express.Router();
+const handleEditUser = (req, res) => res.send("Edit User");
+userRouter.get("/edit", handleEditUser);
 
-app.use(logger); //app.use(morgan("dev"))라고 사용해도 같음
-app.get("/", handleHome);
-app.get("/login", handleLogin);
+const videoRouter = express.Router();
+const handleWatchVideo = (req, res) => res.send("Watch Video");
+videoRouter.get("/watch", handleWatchVideo);
+
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 
 const handleListening = () => {
   console.log(`✅ Server listening on port http://localhost:${PORT} ✈️✈️`);
