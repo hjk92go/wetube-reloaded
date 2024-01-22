@@ -22,12 +22,11 @@ const handleListening = () => {
 app.listen(PORT, handleListening);
 
 /**
- * 4.5 Architecture Recap
- * export & import
- * 뭔갈 임포트 전엔 반드시 export해줘야함
-
- * export default면 하나만 내보낼수 있지만
- * 디폴트로 익스포트할땐 내가 원하는이름으로 지정할수 잇지만
- * export const를 하면, 지정된 원래 이름을 그대로 써야한다.
+ * 4.6 Planning Routes
+ *
+ *
+ *
+ *
+ *
  *
  */
