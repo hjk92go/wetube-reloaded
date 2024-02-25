@@ -1,5 +1,6 @@
 //global router
 export const trending = (req, res) => res.render("home"); //res.render("view name") => 이렇게 하면 home.pug가 랜더링 된다.
+
 export const search = (req, res) => res.send("search");
 
 //video router
