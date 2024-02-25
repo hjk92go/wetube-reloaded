@@ -27,15 +27,12 @@ const handleListening = () => {
 
 app.listen(PORT, handleListening);
 
-// #5.3 Extending Templates
-// template inheritance => 베이스를 만들어주므로써 거기서 확장하여 더더욱 중복된 내용을 막을수 있음
+// #5.4 Variables to Templates
+// 지정한 블록의 이름은 다른곳에서 블록을 사용할때 해당 네임을 사용해야한다.
 
-// base.pug를 만들고 extends사용하는 예시진행
-// extends 한다는 것은 베이스가 되는 파일을 가져다가 그대로 쓰는것을 의미
+// 템플릿으로 어떻게 변수를 보내는 방법(변수를 내보내주는 방법(pageTitle) js 사용)
+// 템플릿을 렌더링 하고있는 컨드롤러에서 변수를 설정해준다
 
-// 베이스를 가져다 쓰되, 해당되는 페이지의 내용으로 반영하려면 => 블록(block)이라는 개념에 대해 알아야한다.
-// 블록은 템플릿의 창문같은 것.
-// 블록을 만드는방법은 body 안에 block content을 만들어준다. => content를 위한 공간이 마련된것을 의미
-
-// content block안에 어떤내용을 넣고싶다면, 해당 페이지.pug로 가서 block content를 해주고 내용을 입력해준다.
-// 자세한건 doc참조
+// 랜더는 2가지의 인수를 받는데, 1. view의 이름 2. 템플릿에 보낼 변수
+// 컨트롤러에서 아래와 같이 변수 설정 해준다(해당컨트롤러에서 => videoController.js)
+// export const trending = (req, res) => res.render("home", { pageTitle: "Home" });
